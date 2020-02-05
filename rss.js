@@ -23,7 +23,7 @@ const byPubDate = (a, b) => {
   return aPubDate.isBefore(bPubDate) ? a : b
 }
 
-const doit = async (rssUrl, numEntries) => {
+const parseRss = async (rssUrl, numEntries) => {
   const data = await fetch(rssUrl);
   const xml = await readStream(data.body)
   const json = await parseString(xml)
@@ -48,4 +48,4 @@ const doit = async (rssUrl, numEntries) => {
     return retval
 }
 
-doit(rssUrl, 3)
+parseRss(rssUrl, 3)
