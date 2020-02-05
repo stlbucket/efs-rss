@@ -20,7 +20,8 @@ function readStream(stream, encoding = "utf8") {
 const byPubDate = (a, b) => {
   const aPubDate = moment(a.pubDate)
   const bPubDate = moment(b.pubDate)
-  return aPubDate.isBefore(bPubDate) ? a : b
+  if (aPubDate.isSame(bPubDate)) return 0
+  return aPubDate.isBefore(bPubDate) ? 1 : -1
 }
 
 const parseRss = async (rssUrl, numEntries) => {
@@ -45,6 +46,7 @@ const parseRss = async (rssUrl, numEntries) => {
     .sort(byPubDate)
     .slice(0,numEntries)
 
+    console.log(retval)
     return retval
 }
 
